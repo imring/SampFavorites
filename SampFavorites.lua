@@ -73,7 +73,8 @@ local function save(self, path)
 
 	self.fileHeader.fileTag = 'SAMP'
 	file:write(self.fileHeader.fileTag)
-	write_int(file, self.fileHeader.fileVersion)
+    write_int(file, self.fileHeader.fileVersion)
+    self.fileHeader.serversCount = self:getServersCount()
 	write_int(file, self.fileHeader.serversCount)
 
 	for i = 1, self.fileHeader.serversCount do
@@ -121,8 +122,7 @@ local function setServer(self, id, server)
 end
 
 local function addServer(self, address, port, hostname, password, rcon)
-	self.fileHeader.serversCount = #self.fileServers + 1
-	self.fileServers[self.fileHeader.serversCount] = { address = address or '', port = port, hostname = hostname or '', password = password or '', rcon = rcon or '' }
+	self.fileServers[#self.fileServers + 1] = { address = address or '', port = port, hostname = hostname or '', password = password or '', rcon = rcon or '' }
 end
 
 local function getServersCount(self)
