@@ -73,8 +73,8 @@ local function save(self, path)
 
 	self.fileHeader.fileTag = 'SAMP'
 	file:write(self.fileHeader.fileTag)
-    write_int(file, self.fileHeader.fileVersion)
-    self.fileHeader.serversCount = self:getServersCount()
+	write_int(file, self.fileHeader.fileVersion)
+	self.fileHeader.serversCount = self:getServersCount()
 	write_int(file, self.fileHeader.serversCount)
 
 	for i = 1, self.fileHeader.serversCount do
